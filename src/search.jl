@@ -1,7 +1,22 @@
 module Search
 using Crayons
 
-function search_by_extension(path::String, ext::Array{String,1})::Array{Dict{String, String},1}
+"""
+    search_by_extension() :: Array{Dict{String, String},1}
+
+Returns an Array of files that were found.
+
+# Examples
+```julia
+julia> FileCLI.Search.search_by_extension(".", String["jl"], false)
+4-element Array{Dict{String,String},1}:
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\","file"=>"test.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"FileCLI.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"search.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test","file"=>"runtests.jl")
+```
+"""
+function search_by_extension(path::String, ext::Array{String,1}, print_output::Bool=true)::Array{Dict{String, String},1}
     
     found::Bool = false
     files_found::Array{Dict{String, String},1} = []
@@ -13,8 +28,10 @@ function search_by_extension(path::String, ext::Array{String,1})::Array{Dict{Str
         reg = Regex("$(ext[1])\$")
     end
     
-    print(Crayon(background = :black), Crayon(foreground=:light_green), "Looking at $(p)...")
-    print("\n")
+    if print_output
+        print(Crayon(background = :black), Crayon(foreground=:light_green), "Looking at $(p)...")
+        print("\n")
+    end
 
     for (root, dir, files) in walkdir(p)
         
@@ -45,15 +62,17 @@ function search_by_extension(path::String, ext::Array{String,1})::Array{Dict{Str
         end
     end
     
-    print(Crayon(background = :black), Crayon(foreground = :light_green), "Successfully Finished.\n")
-    
+    if print_output
+        print(Crayon(background = :black), Crayon(foreground = :light_green), "Successfully Finished.\n")
+    end
+
     if !found
     
         print(Crayon(background = :red, foreground=:white), "No File was found found with extenstions -> ")
         print(Crayon(background = :yellow), Crayon(foreground = :red), " .$(ext)\n")
         print("\n")
     
-    else
+    elseif print_output
     
         for f in files_found
             print(Crayon(foreground = :red), " -> ")

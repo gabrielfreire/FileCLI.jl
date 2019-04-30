@@ -19,7 +19,7 @@ Base.@ccallable function julia_main(ARGS::Vector{String}):: Cint
             print_help()
             return 0
         elseif ARGS[1] == "-s"
-            Search.search_by_extension(ARGS[2], ARGS[3:end])
+            Search.search_by_extension(ARGS[2], ARGS[3:end], true)
         else
             print_help()
         end

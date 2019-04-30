@@ -15,27 +15,37 @@ sh> julia -e 'using Pkg; Pkg.add("https://github.com/gabrielfreire/FileCLI.jl")'
 ## **Search** 
 ### Search for .jl files in current directory
 ![usage02](assets/search_usage.png)
-or programatically
+- or programatically
 ```julia
 using FileCLI
 
 # Find all .jl files in the CURRENT folder
-js_files_found = FileCLI.Search.search_by_extension(".", String["jl"])
+js_files_found = FileCLI.Search.search_by_extension(".", String["jl"], false)
 
 # Find all .jl files in the PARENT folder
-js_files_found = FileCLI.Search.search_by_extension("../", String["jl"])
+js_files_found = FileCLI.Search.search_by_extension("../", String["jl"], false)
 
 # Find all .jl and .js files in the PARENT folder
-js_files_found = FileCLI.Search.search_by_extension("../", String["jl", "js"])
+js_files_found = FileCLI.Search.search_by_extension("../", String["jl", "js"], false)
 
 # Find all .jl files in the test_folder folder
-js_files_found = FileCLI.Search.search_by_extension("test_folder", String["jl"])
+js_files_found = FileCLI.Search.search_by_extension("test_folder", String["jl"], false)
 
 # Find a specific file in the test_folder folder
-js_files_found = FileCLI.Search.search_by_extension("test_folder", String["test.jl"])
+js_files_found = FileCLI.Search.search_by_extension("test_folder", String["test.jl"], false)
 
 # Find all .json files in the PARENT folder
-js_files_found = FileCLI.Search.search_by_extension("../", String["json"])
+js_files_found = FileCLI.Search.search_by_extension("../", String["json"], false)
+```
+
+```shell
+# REPL
+julia> FileCLI.Search.search_by_extension(".", String["jl"], false)
+4-element Array{Dict{String,String},1}:
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\","file"=>"test.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"FileCLI.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"search.jl")
+ Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test","file"=>"runtests.jl")
 ```
 
 # Test
