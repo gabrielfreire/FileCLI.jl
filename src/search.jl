@@ -6,6 +6,7 @@ struct FileDump
     file::String
     root::String
 end
+
 """
     search_by_extension() :: Array{FileDump,1}
 
@@ -14,11 +15,11 @@ Returns an Array of files that were found.
 # Examples
 ```julia
 julia> FileCLI.Search.search_by_extension(".", String["jl"], false)
-4-element Array{Dict{String,String},1}:
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\","file"=>"test.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"FileCLI.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"search.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test","file"=>"runtests.jl")
+4-element Array{FileCLI.Search.FileDump,1}:
+ FileCLI.Search.FileDump("test.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\")
+ FileCLI.Search.FileDump("FileCLI.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src")
+ FileCLI.Search.FileDump("search.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src")
+ FileCLI.Search.FileDump("runtests.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test")
 ```
 """
 function search_by_extension(path::String, ext::Array{String,1}, print_output::Bool=true)::Array{FileDump,1}
