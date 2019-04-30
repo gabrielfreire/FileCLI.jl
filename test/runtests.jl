@@ -7,11 +7,11 @@ include("../src/FileCLI.jl")
 
     js_files_found = FileCLI.Search.search_by_extension("test_folder", String["js"])
     @test length(js_files_found) == 2
-    @test occursin(r"js$", js_files_found[1]["file"]) == true
+    @test occursin(r"js$", js_files_found[1].file) == true
 
     txt_files_found = FileCLI.Search.search_by_extension("test_folder", String["txt"], true)
     @test length(txt_files_found) == 2
-    @test occursin(r"txt$", txt_files_found[1]["file"]) == true
+    @test occursin(r"txt$", txt_files_found[1].file) == true
 
     txt_and_js_files_found = FileCLI.Search.search_by_extension("test_folder", String["txt", "js"], false)
     @test length(txt_and_js_files_found) == 4

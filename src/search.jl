@@ -1,8 +1,13 @@
 module Search
 using Crayons
 
+
+struct FileDump
+    file::String
+    root::String
+end
 """
-    search_by_extension() :: Array{Dict{String, String},1}
+    search_by_extension() :: Array{FileDump,1}
 
 Returns an Array of files that were found.
 
@@ -16,10 +21,10 @@ julia> FileCLI.Search.search_by_extension(".", String["jl"], false)
  Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test","file"=>"runtests.jl")
 ```
 """
-function search_by_extension(path::String, ext::Array{String,1}, print_output::Bool=true)::Array{Dict{String, String},1}
+function search_by_extension(path::String, ext::Array{String,1}, print_output::Bool=true)::Array{FileDump,1}
     
     found::Bool = false
-    files_found::Array{Dict{String, String},1} = []
+    files_found::Array{FileDump,1} = []
     
     p::String = abspath(path)
     
@@ -50,7 +55,7 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
                 if occursin(reg, f)
                     
                     found = true
-                    push!(files_found, Dict{String, String}("file" => f, "folder" => root))
+                    push!(files_found, FileDump(f, root))
                     
                     # reset regex
                     if length(ext) > 1 reg = Nothing end
@@ -77,10 +82,10 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
         for f in files_found
             print(Crayon(foreground = :red), " -> ")
             print("")
-            print(Crayon(foreground = :light_yellow), " $(f["file"]) ")
+            print(Crayon(foreground = :light_yellow), " $(f.file) ")
             print("\tat\t")
             print("")
-            print(Crayon(foreground = :white), " $(f["folder"])\n")
+            print(Crayon(foreground = :white), " $(f.root)\n")
         end
 
         print(Crayon(foreground = :light_green), "$(length(files_found)) files were found\n")

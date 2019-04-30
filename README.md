@@ -41,11 +41,11 @@ js_files_found = FileCLI.Search.search_by_extension("../", String["json"], false
 ```shell
 # REPL
 julia> FileCLI.Search.search_by_extension(".", String["jl"], false)
-4-element Array{Dict{String,String},1}:
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\","file"=>"test.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"FileCLI.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src","file"=>"search.jl")
- Dict("folder"=>"C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test","file"=>"runtests.jl")
+4-element Array{FileCLI.Search.FileDump,1}:
+ FileCLI.Search.FileDump("test.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\")
+ FileCLI.Search.FileDump("FileCLI.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src")
+ FileCLI.Search.FileDump("search.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\src")
+ FileCLI.Search.FileDump("runtests.jl", "C:\\Users\\gabriel.freire\\Documents\\workspace\\FileCLI.jl\\test")
 ```
 
 # Test
