@@ -30,7 +30,6 @@ Base.@ccallable function julia_main(ARGS::Vector{String}):: Cint
     end
 end
 
+precompile(print_help, ())
 julia_main(ARGS)
 end # module
-# order reference number: 21823201904301438010
-# reference for customer care: 276363

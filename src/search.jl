@@ -95,5 +95,6 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
     return files_found
 end
 
+precompile(search_by_extension, (String, Array{String,1}, Bool))
 export search_by_extension
 end
