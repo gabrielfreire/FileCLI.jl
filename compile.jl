@@ -1,6 +1,5 @@
+using ApplicationBuilder
 
-using PackageCompiler
-push!(LOAD_PATH, joinpath(abspath(@__DIR__), "../"))
-compile_package("FileCLI")
-
-# sys image `julia -J 'C:\Users\gabriel.freire\.julia\dev\PackageCompiler\sysimg\sys.dll'`
+app_path = joinpath(abspath(@__DIR__), "src", "FileCLI.jl")
+# ApplicationBuilder.build_app_bundle(app_path, appname="FileCLI")
+ApplicationBuilder.build_app_bundle(app_path, appname="FileCLI", commandline_app=true, verbose=true, snoopfile=joinpath(abspath(app_path, ".."), "snoop.jl"), create_installer=true)
