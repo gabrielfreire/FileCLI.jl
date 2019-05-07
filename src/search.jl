@@ -29,8 +29,10 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
     
     p::String = abspath(path)
     
+    mult_ext = length(ext) > 1
+    
     reg = Nothing
-    if length(ext) == 1
+    if !mult_ext
         reg = Regex("$(ext[1])\$")
     end
     
@@ -39,33 +41,32 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
         print("\n")
     end
 
-    for (root, dir, files) in walkdir(p)
-        
-        if occursin("node_modules", root)
-            continue
-        end
-        
-        for f in files
-            for e in ext
-                
-                # only make new regex if user passed multiple names
-                if reg == Nothing && length(ext) > 1
-                    reg = Regex("$(e)\$")
+    try
+        for (root, dir, files) in walkdir(p)
+            if occursin("node_modules", root)
+                continue
+            end
+    
+            for f in files
+                if !isfile(joinpath(root, f))
+                    continue
                 end
-                
-                if occursin(reg, f)
-                    
-                    found = true
-                    push!(files_found, FileDump(f, root))
-                    
-                    # reset regex
-                    if length(ext) > 1 reg = Nothing end
-                else
-                    # reset regex
-                    if length(ext) > 1 reg = Nothing end
+    
+                for e in ext
+                    # only make new regex if user passed multiple names
+                    if mult_ext
+                        reg = Regex("$(e)\$")
+                    end
+                    if occursin(reg, f) 
+                        found = true
+                        push!(files_found, FileDump(f, root))
+                        
+                    end
                 end
             end
         end
+    catch e
+        println("[WARN] $(e)")
     end
     
     if print_output
@@ -73,13 +74,10 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
     end
 
     if !found
-    
         print(Crayon(background = :red, foreground=:white), "No File was found found with extenstions -> ")
         print(Crayon(background = :yellow), Crayon(foreground = :red), " .$(ext)\n")
         print("\n")
-    
     elseif print_output
-    
         for f in files_found
             print(Crayon(foreground = :red), " -> ")
             print("")
@@ -88,13 +86,10 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
             print("")
             print(Crayon(foreground = :white), " $(f.root)\n")
         end
-
         print(Crayon(foreground = :light_green), "$(length(files_found)) files were found\n")
-    
     end
     return files_found
 end
 
-precompile(search_by_extension, (String, Array{String,1}, Bool))
 export search_by_extension
 end

@@ -30,6 +30,5 @@ Base.@ccallable function julia_main(ARGS::Vector{String}):: Cint
     end
 end
 
-precompile(print_help, ())
 julia_main(ARGS)
 end # module

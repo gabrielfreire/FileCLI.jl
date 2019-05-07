@@ -1,10 +1,10 @@
 using ApplicationBuilder
 
-app_path = joinpath(abspath(@__DIR__), "src", "FileCLI.jl")
+app_path = joinpath(abspath(@__DIR__), "FileCLI.jl")
 # ApplicationBuilder.build_app_bundle(app_path, appname="FileCLI")
 ApplicationBuilder.build_app_bundle(app_path, 
-                                    appname="FileCLI", 
+                                    appname="fcli", 
                                     commandline_app=true, 
                                     verbose=true, 
-                                    snoopfile=joinpath(abspath(app_path, ".."), "snoop.jl"), 
+                                    snoopfile=joinpath(@__DIR__, "call_functions.jl"), 
                                     create_installer=true)

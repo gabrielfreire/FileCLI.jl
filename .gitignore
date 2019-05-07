@@ -1,5 +1,10 @@
 *.nsi
 *.exe
+src/*.exe
+src/*.nsi
+src/precompile
+src/builddir
 builddir/
 builddir/*
 builddir/**/*
+*.csv
