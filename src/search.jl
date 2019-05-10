@@ -74,8 +74,8 @@ function search_by_extension(path::String, ext::Array{String,1}, print_output::B
     end
 
     if !found
-        print(Crayon(background = :red, foreground=:white), "No File was found found with extenstions -> ")
-        print(Crayon(background = :yellow), Crayon(foreground = :red), " .$(ext)\n")
+        print(Crayon(foreground =:red), "No File was found found with extenstions -> ")
+        print(Crayon(foreground =:red), " .$(ext)\n")
         print("\n")
     elseif print_output
         for f in files_found

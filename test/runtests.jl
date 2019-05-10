@@ -3,8 +3,8 @@ using Test
 # ------------------------------- Search tests
 include("../src/FileCLI.jl")
 
-@testset "Search tests" begin
-    test_folder = joinpath(abspath(@__DIR__), "test_folder")
+test_folder = joinpath(abspath(@__DIR__), "test_folder")
+@testset "==== Search tests ====" begin
 
     js_files_found = FileCLI.Search.search_by_extension(test_folder, String["js"])
     @test length(js_files_found) == 2
@@ -29,4 +29,19 @@ include("../src/FileCLI.jl")
     match_all_files_found = FileCLI.Search.search_by_extension(test_folder, String[""], false)
     @test length(match_all_files_found) == 4
 
+
+end
+
+@testset "==== Compare tests ====" begin
+
+    file1 = joinpath(test_folder, "jsFile.js")
+    file2 = joinpath(test_folder, "jsFile1.js")
+    is_same_file = FileCLI.FileCompare.file_compare(file1, file1);
+    @test is_same_file == true
+
+    is_not_same_file = FileCLI.FileCompare.file_compare(file1, file2);
+    @test is_not_same_file == false
+
+    is_not_same_file_print = FileCLI.FileCompare.file_compare(file1, file2, true);
+    @test is_not_same_file == false
 end
