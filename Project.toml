@@ -4,6 +4,6 @@ authors = ["Gabriel Freire <gabriel.freire@imsmaxims.com>"]
 version = "0.1.0"
 
 [deps]
+ApplicationBuilder = "f9309374-59cc-5ff5-a120-e3e470a57b4a"
 Crayons = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
-Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+PackageCompiler = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
