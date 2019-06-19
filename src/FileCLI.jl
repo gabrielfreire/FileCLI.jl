@@ -3,8 +3,8 @@ module FileCLI
 
 
 include("helpers.jl")
-include("search.jl")
-include("compare.jl")
+include("Search.jl")
+include("FileCompare.jl")
 
 using .Search
 using .FileCompare

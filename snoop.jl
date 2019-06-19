@@ -9,3 +9,4 @@ data = SnoopCompile.read("http_compiles.csv")
 
 pc = SnoopCompile.parcel(reverse!(data[2]))
 SnoopCompile.write("src/precompile", pc)
+rm("http_compiles.csv")
