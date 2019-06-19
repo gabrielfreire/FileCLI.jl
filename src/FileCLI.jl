@@ -6,11 +6,6 @@ include("helpers.jl")
 include("Search.jl")
 include("FileCompare.jl")
 
-using .Search
-using .FileCompare
-
-
-
 Base.@ccallable function julia_main(ARGS::Vector{String}):: Cint
     if length(ARGS) > 1
         if ARGS[1] == "-h"
