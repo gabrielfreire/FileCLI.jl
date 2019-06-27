@@ -1,6 +1,7 @@
 Base.eval(:(have_color=true))
 module FileCLI
 
+export FileCompare
 
 include("helpers.jl")
 include("Search.jl")
